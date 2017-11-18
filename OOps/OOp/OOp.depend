@@ -1,0 +1,563 @@
+# depslib dependency file v1.0
+1510942295 source:g:\oops project\oops\oop\main.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<stdio.h>
+	<string>
+	"screen_Image.h"
+	"Region.h"
+
+1506106370 g:\mingw\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_joystick.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_shape.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<wchar.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<sal.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\begin_code.h
+
+1506106372 g:\mingw\include\sdl2\close_code.h
+
+1506106370 g:\mingw\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<mbarrier.h>
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	<process.h>
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	<pmmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"SDL_endian.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106370 g:\mingw\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_shape.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1506106372 g:\mingw\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508772770 g:\mingw\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1510397845 g:\oops project\oops\oop\splash_screen.h
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+
+1510482726 source:g:\oops project\oops\oop\splash_screen.cpp
+	"splash_Screen.h"
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	<stdio.h>
+
+1510771516 source:g:\oops project\oops\oop\button.cpp
+	"Button.h"
+
+1510771217 g:\oops project\oops\oop\button.h
+	<SDL.h>
+	<SDL_image.h>
+
+1510748875 source:g:\oops project\oops\oop\newgame.cpp
+	"NewGame.h"
+
+1510463282 g:\oops project\oops\oop\newgame.h
+	"Button.h"
+
+1510749098 source:g:\oops project\oops\oop\exitgame.cpp
+	"ExitGame.h"
+
+1510479587 g:\oops project\oops\oop\exitgame.h
+	"Button.h"
+
+1510748867 source:g:\oops project\oops\oop\loadgame.cpp
+	"LoadGame.h"
+
+1510479361 g:\oops project\oops\oop\loadgame.h
+	"Button.h"
+
+1510418819 source:g:\oops project\oops\oop\pausegame.cpp
+	"PauseGame.h"
+
+1510419778 g:\oops project\oops\oop\pausegame.h
+	"Button.h"
+
+1510418847 source:g:\oops project\oops\oop\resumegame.cpp
+	"ResumeGame.h"
+
+1510419777 g:\oops project\oops\oop\resumegame.h
+	"Button.h"
+
+1510418774 source:g:\oops project\oops\oop\savegame.cpp
+	"SaveGame.h"
+
+1510419778 g:\oops project\oops\oop\savegame.h
+	"Button.h"
+
+1510485177 source:g:\oops project\oops\oop\screen_image.cpp
+	"screen_Image.h"
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	<stdio.h>
+
+1510484998 g:\oops project\oops\oop\screen_image.h
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+
+1510748860 source:g:\oops project\oops\oop\fullscreen.cpp
+	"FullScreen.h"
+
+1510576615 g:\oops project\oops\oop\fullscreen.h
+	"Button.h"
+
+1508772768 g:\mingw\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1510906859 source:g:\oops project\oops\oop\lawn00.cpp
+	"Lawn00.h"
+
+1510901235 g:\oops project\oops\oop\lawn00.h
+	"Button.h"
+
+1510902187 g:\oops project\oops\oop\lawn01.h
+	"Button.h"
+
+1510902217 source:g:\oops project\oops\oop\lawn01.cpp
+	"Lawn01.h"
+
+1510902574 source:g:\oops project\oops\oop\lawn02.cpp
+	"Lawn02.h"
+
+1510902567 g:\oops project\oops\oop\lawn02.h
+	"Button.h"
+
+1510903800 source:g:\oops project\oops\oop\lab05.cpp
+	"Lab05.h"
+
+1510903776 g:\oops project\oops\oop\lab05.h
+	"Button.h"
+
+1510903857 source:g:\oops project\oops\oop\lab06.cpp
+	"Lab06.h"
+
+1510903833 g:\oops project\oops\oop\lab06.h
+	"Button.h"
+
+1510904224 source:g:\oops project\oops\oop\lab07.cpp
+	"Lab07.h"
+
+1510903920 g:\oops project\oops\oop\lab07.h
+	"Button.h"
+
+1510904001 source:g:\oops project\oops\oop\lab08.cpp
+	"Lab08.h"
+
+1510904224 g:\oops project\oops\oop\lab08.h
+	"Button.h"
+
+1510903371 source:g:\oops project\oops\oop\lawn03.cpp
+	"Lawn03.h"
+
+1510904224 g:\oops project\oops\oop\lawn03.h
+	"Button.h"
+
+1510903658 source:g:\oops project\oops\oop\lawn04.cpp
+	"Lawn04.h"
+
+1510903757 g:\oops project\oops\oop\lawn04.h
+	"Button.h"
+
+1510904795 source:g:\oops project\oops\oop\lawn05.cpp
+	"Lawn05.h"
+
+1510904797 g:\oops project\oops\oop\lawn05.h
+	"Button.h"
+
+1510904976 source:g:\oops project\oops\oop\lawn06.cpp
+	"Lawn06.h"
+
+1510905148 g:\oops project\oops\oop\lawn06.h
+	"Button.h"
+
+1510905049 source:g:\oops project\oops\oop\lawn07.cpp
+	"Lawn07.h"
+
+1510905148 g:\oops project\oops\oop\lawn07.h
+	"Button.h"
+
+1510905123 source:g:\oops project\oops\oop\lawn08.cpp
+	"Lawn08.h"
+
+1510905148 g:\oops project\oops\oop\lawn08.h
+	"Button.h"
+
+1510906828 source:g:\oops project\oops\oop\lawn10.cpp
+	"Lawn10.h"
+
+1510906719 g:\oops project\oops\oop\lawn10.h
+	"Button.h"
+
+1510932828 source:g:\oops project\oops\oop\lawn11.cpp
+	"Lawn11.h"
+
+1510932791 g:\oops project\oops\oop\lawn11.h
+	"Button.h"
+
+1510933029 source:g:\oops project\oops\oop\lawn12.cpp
+	"Lawn12.h"
+
+1510933079 g:\oops project\oops\oop\lawn12.h
+	"Button.h"
+
+1510933141 source:g:\oops project\oops\oop\lawn13.cpp
+	"Lawn13.h"
+
+1510933146 g:\oops project\oops\oop\lawn13.h
+	"Button.h"
+
+1510933235 source:g:\oops project\oops\oop\lawn14.cpp
+	"Lawn14.h"
+
+1510933242 g:\oops project\oops\oop\lawn14.h
+	"Button.h"
+
+1510933322 source:g:\oops project\oops\oop\lawn15.cpp
+	"Lawn15.h"
+
+1510933350 g:\oops project\oops\oop\lawn15.h
+	"Button.h"
+
+1510933443 source:g:\oops project\oops\oop\lawn16.cpp
+	"Lawn16.h"
+
+1510933446 g:\oops project\oops\oop\lawn16.h
+	"Button.h"
+
+1510933517 source:g:\oops project\oops\oop\lawn17.cpp
+	"Lawn17.h"
+
+1510933519 g:\oops project\oops\oop\lawn17.h
+	"Button.h"
+
+1510936507 g:\oops project\oops\oop\region.h
+	<SDL.h>
+	<SDL_image.h>
+
+1510936594 source:g:\oops project\oops\oop\region.cpp
+	"Region.h"
+
