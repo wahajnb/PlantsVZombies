@@ -37,8 +37,14 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf" />
 			<Add directory="G:/mingw/lib" />
 		</Linker>
+		<Unit filename="Music.cpp" />
+		<Unit filename="Music.h" />
 		<Unit filename="Region.cpp" />
 		<Unit filename="Region.h" />
+		<Unit filename="Sound.cpp" />
+		<Unit filename="Sound.h" />
+		<Unit filename="Text_Image.cpp" />
+		<Unit filename="Text_Image.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="screen_Image.cpp" />
 		<Unit filename="screen_Image.h" />

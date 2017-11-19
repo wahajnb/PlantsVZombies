@@ -43,8 +43,7 @@ SDL_Texture* screen_Image::loadMedia(string path )
         ss_Texture = SDL_CreateTextureFromSurface(ss_Rend, loadedSurface );
 		if( ss_Texture == NULL )
 		{
-		    cout << "wtf" << endl;
-			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+            printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
 		}
 
 		//Get rid of old loaded surface

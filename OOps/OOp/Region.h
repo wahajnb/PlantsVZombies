@@ -4,10 +4,10 @@
 #include <SDL_image.h>
 
 
-class Region
+class Region        //Its basic function is to allocate a region on which we will be rendering out texture
 {
     public:
-        Region(SDL_Renderer* , int, int, int, int);
+        Region(SDL_Renderer* , int, int, int, int);     //Constructor
         ~Region();
         SDL_Rect area;
         SDL_Renderer* area_Rend;

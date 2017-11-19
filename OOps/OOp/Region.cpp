@@ -3,7 +3,6 @@
 Region::Region(SDL_Renderer* real,int x, int y, int w, int h)
 {
     area_Rend = real;
-
     area.x = x;
     area.y = y;
     area.w = w;

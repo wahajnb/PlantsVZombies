@@ -1,24 +1,25 @@
-/*This source code copyrighted by Lazy Foo' Productions (2004-2015)
-and may not be redistributed without written permission.*/
-
-//Using SDL, SDL_image, standard IO, and strings
+//Including the headers the program is going to use
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+#include <SDL_ttf.h>
 #include <stdio.h>
 #include <string>
+#include <sstream>
 #include "screen_Image.h"
 #include "Region.h"
+#include "Text_Image.h"
+#include "Music.h"
+#include "Sound.h"
+
 
 //Starts up SDL and creates window
 bool init();
 
-//Loads media
-bool loadMedia();
-
 //Frees media and shuts down SDL
 void close();
 
+// Updates the screen
 void update_Screen();
 
 //Screen dimension constants
@@ -31,8 +32,18 @@ SDL_Window* gWindow = NULL;
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
 
-//The texture
+//The texture to store texture
 SDL_Texture* screen_Texture=NULL;
+
+//The font to be used
+TTF_Font* roboto_Font = NULL;
+
+//Sound effects that will be used
+Mix_Music *gMusic = NULL;
+Mix_Chunk *bpress_Music = NULL;
+
+//The color to be used
+SDL_Color black_color ;
 
 bool init()
 {
@@ -54,7 +65,7 @@ bool init()
 		}
 
 		//Create window
-		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_BORDERLESS );
+		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN_DESKTOP );
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -81,6 +92,33 @@ bool init()
 					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 					success = false;
 				}
+
+				//Initialize SDL_mixer
+                if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+                {
+                    printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+                    success = false;
+                }
+
+				//Initialize SDL_ttf
+				if( TTF_Init() == -1 )
+				{
+					printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+					success = false;
+				}
+
+				roboto_Font= TTF_OpenFont("Fonts/Roboto/Roboto-Bold.ttf", 100);         //Initializing roboto font
+
+                if( roboto_Font == NULL )
+                {
+                    printf( "Failed to load roboto font! SDL_ttf Error: %s\n", TTF_GetError() );
+                    success = false;
+                }
+                else
+                {
+                    black_color = { 0, 0, 0 };          //Initializing color
+
+                }
 			}
 		}
 	}
@@ -99,18 +137,31 @@ void update_Screen()
     //Update screen
     SDL_RenderPresent( gRenderer );
 
+    //Clears the renderer
     SDL_RenderClear( gRenderer );
 
 }
 
 void close()
 {
+    //Free global font
+    TTF_CloseFont( roboto_Font );
+	roboto_Font = NULL;
+
+	//Free the sound effects
+	Mix_FreeChunk(bpress_Music);
+	bpress_Music = NULL;
+
+	//Free the music
+	Mix_FreeMusic(gMusic);
+	gMusic = NULL;
 
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
 	gRenderer = NULL;
+
 	//Free loaded image
 	SDL_DestroyTexture( screen_Texture );
 	screen_Texture = NULL;
@@ -118,11 +169,11 @@ void close()
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
+	TTF_Quit();
 }
 
 int main( int argc, char* args[] )
 {
-
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -130,28 +181,50 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
+	    //Loading Main menu music
+        Music mainMenu_Music (gMusic,100);
+        mainMenu_Music.load_Music("soundtracks/Main menu sound track.wav");
+
+        //Loading In Game music
+        Music game_Music (gMusic,320);
+        game_Music.load_Music("soundtracks/day_soundtrack.wav");
+
+        //Loading button click sound
+        Sound button_ClickMusic (bpress_Music);
+        button_ClickMusic.load_Sound("soundtracks/Buttonclick.wav");
+
+        int suns_Num = 0;               // Number of suns the user have
+        string str_SunNum;              // Total number of suns string
 
 		bool quit = false;              //  Main loop flag
-		bool screen_flag = true;            // Splash Screen flag
-		bool menu_flag = true;               // Main Menu flag
-        int mouse_x;                //mouse x coordinates
-        int mouse_y;                //mouse y coordinates
+		bool screen_flag = true;        // Splash Screen flag
+		bool menu_flag = true;          // Main Menu flag
+        int mouse_x;                   //mouse x coordinates
+        int mouse_y;                  //mouse y coordinates
 
 		int i=0;    //Splash screen Animation ending flag
 
-		Region fu(gRenderer,0,0,1366,768);              //fullscreen
-		Region ex(gRenderer,800,620,220,50);              //exitgame
-		Region lo(gRenderer, 800, 550, 220, 50);              // loadgame
+		Region fu(gRenderer,0,0,1366,768);                   //fullscreen
+		Region ex(gRenderer,800,620,220,50);                //exitgame
+		Region lo(gRenderer, 800, 550, 220, 50);            // loadgame
 		Region ne(gRenderer,800, 480,220, 50);              //newgame
+        Region sslot(gRenderer, 40, 0, 600, 120);           //Seed Slot
+        Region sunslot(gRenderer, 150, 10, 73, 100 );       //Sunflower slot
+        Region pslot (gRenderer, 233, 10, 73,100);          //Pea plant slot
+        Region chompslot (gRenderer, 313, 10, 73,100);      //chomper plant slot
+        Region shovelslot (gRenderer,640,0,90,95);          //Shovel slot
+        Region scount_1Digit (gRenderer,85,85,14,28);       //Sun count 1 digit slot
+        Region scount_2Digit (gRenderer,80,85,24,28);       //Sun count 2 digit slot
+        Region scount_3Digit (gRenderer,74,85,35,28);       //Sun count 3 digit slot
 
-		int x_lawn=68;
-		int y_lawn=85;
-		Region *Lawn[5][9];                                 //lawn tiles
+		int x_lawn=68;          //starting x-coordinate of 1st tile
+		int y_lawn=100;         //starting y-coordinate of 1st tile
+		Region *Lawn[5][9];     //lawn tiles array
 		for (int i=0; i<5; i++)
         {
             for (int j=0; j<9; j++)
             {
-                Lawn[i][j] = new Region(gRenderer,x_lawn ,y_lawn ,137,128);
+                Lawn[i][j] = new Region(gRenderer,x_lawn ,y_lawn ,137,128);     //Initializing lawn tiles
                 x_lawn = x_lawn + 137;
             }
             x_lawn = 68;
@@ -159,12 +232,11 @@ int main( int argc, char* args[] )
         }
 
 
-
 		//Event handler
 		SDL_Event e;
 
 		screen_Image menu(gRenderer);
-        menu.loadMedia("Menu Screen.png");     //Loading menu screen texture
+        menu.loadMedia("Gifs/Menu Items/Menu Screen.png");     //Loading menu screen texture
 
         screen_Image yard(gRenderer);
         yard.loadMedia("Gifs/Lawn/Yard1.png");     //Loading back yard screen texture
@@ -197,26 +269,43 @@ int main( int argc, char* args[] )
         exit_GamePress.loadMedia("Gifs/Menu Items/Exit Game Press.png") ;//Loading exit game button press texture
 
         screen_Image light_Lawn(gRenderer);
-        light_Lawn.loadMedia("Gifs/Grass/darkgrass.png");
+        light_Lawn.loadMedia("Gifs/Grass/lightgrass.png");      //Loading light grass texture for tiles
 
         screen_Image dark_Lawn(gRenderer);
-        dark_Lawn.loadMedia("Gifs/Grass/lightgrass.png");
+        dark_Lawn.loadMedia("Gifs/Grass/darkgrass.png");        //Loading dark grass texture for tiles
 
-        screen_Image splash[11];
+        screen_Image seed_Slot(gRenderer);
+        seed_Slot.loadMedia("Gifs/Plants packet/SeedBank.png"); //Loading seed slot texture
+
+        screen_Image pea_Plantcard(gRenderer);
+        pea_Plantcard.loadMedia("Gifs/Plants packet/Peashooter_HD_Seed.png");   //Loading pea's plant card texture
+
+        screen_Image sun_Plantcard(gRenderer);
+        sun_Plantcard.loadMedia("Gifs/Plants packet/Sunflower_HD_Seed.png");    //Loading sunflower's plant card texture
+
+        screen_Image chomper_plantcard(gRenderer);
+        chomper_plantcard.loadMedia("Gifs/Plants packet/Chomper_Seed.png");     //Loading chomper's plant card texture
+
+        screen_Image shovel_card(gRenderer);
+        shovel_card.loadMedia("Gifs/Plants packet/Shovel.png");     //Loading shovel's slot texture
+
+        Text_Image sun_count(gRenderer);        //Loading sun count texture
+
+        screen_Image splash[11];                //Array for splash screen animation
 	    for (int i=0; i<11; i++)
         {
-            splash[i].ss_Rend = gRenderer;
+            splash[i].ss_Rend = gRenderer;      //Initializing splash sreens
         }
 
-        bool load_On = false;
-        bool exit_On = false;
-        bool new_On = false;
+        bool load_On = false;           //Bool telling whether the mouse is on load button
+        bool exit_On = false;           //Bool telling whether the mouse is on exit button
+        bool new_On = false;            //Bool telling whether the mouse is on newgame button
 
-        bool load_pressed = false;
-        bool exit_pressed = false;
-        bool new_pressed = false;
+        bool load_pressed = false;      //Bool telling whether the load button is pressed
+        bool exit_pressed = false;      //Bool telling whether the exit button is pressed
+        bool new_pressed = false;       //Bool telling whether the new game button is pressed
 
-        // Initializing array of splash screens for the animation
+        // Loading splash screens textures for the animation
         splash[0].loadMedia("Splash Screen/Splash 1.png ");
         splash[1].loadMedia("Splash Screen/Splash 2.png ");
         splash[2].loadMedia("Splash Screen/Splash 3.png ");
@@ -232,7 +321,7 @@ int main( int argc, char* args[] )
 			//While application is running
 			while( !quit )
 			{
-			    if (screen_flag == true)        //Splash Screen Loop
+			    if (screen_flag == true)             //Splash Screen Loop
                 {
                     //Handle events on queue
                     while( SDL_PollEvent( &e ) != 0 )
@@ -249,35 +338,33 @@ int main( int argc, char* args[] )
 
                     if (i==0)
                     {
-                        SDL_Delay(3000);        //Delay for the first texture
+                        SDL_Delay(3000);               //Delay for the first texture of splash screen
                     }
                     else
                     {
-                        SDL_Delay(30);
+                        SDL_Delay(30);                  //Delay for rest of the textures
                     }
                     i++;
-                    if (i>=10)
+                    if (i>=10)                          //Checking if animation textures have ended
                     {
                         screen_flag = false;
-                        //delete []splash;
                     }
 
-
-
                 }
-                else if (menu_flag == true)          //Main menu loop
-                {
-                    //Handle events on queue
 
-                    fu.set_Viewport();
+                else if (menu_flag == true)            //Main menu loop
+                {
+                    mainMenu_Music.play_Music();        //Plays main menu music
+
+                    fu.set_Viewport();         //Sets the viewport for full screen
                     screen_Texture = menu.ss_Texture;
                     SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
 
 
-                    ne.set_Viewport();
-                    if (new_On == true)
+                    ne.set_Viewport();          //Sets the viewport for new game button
+                    if (new_On == true)         //Checks if the mouse is on the new button
                     {
-                        if (new_pressed == true)
+                        if (new_pressed == true)    //Checks whether the new game button is pressed
                         {
                             screen_Texture = new_GamePress.ss_Texture;
                             SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
@@ -295,10 +382,10 @@ int main( int argc, char* args[] )
                         SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
                     }
 
-                    lo.set_Viewport();
-                    if (load_On == true)
+                    lo.set_Viewport();          //Sets the view port for load game button
+                    if (load_On == true)       //Checks if the mouse is on the load game button
                     {
-                        if (load_pressed == true)
+                        if (load_pressed == true)       //Checks if the load game button is being pressed
                         {
                             screen_Texture = load_GamePress.ss_Texture;
                             SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
@@ -317,8 +404,8 @@ int main( int argc, char* args[] )
                     }
 
 
-                    ex.set_Viewport();
-                    if (exit_On == true)
+                    ex.set_Viewport();      //Sets the view port for exit game button
+                    if (exit_On == true)    //Checks if the mouse is on the exit gamr button
                     {
                         if (exit_pressed == true)
                         {
@@ -339,24 +426,17 @@ int main( int argc, char* args[] )
                     }
 
 
+                    update_Screen();
 
-                    //Update screen
-                    SDL_RenderPresent( gRenderer );
-//                    SDL_Delay(500);
-                    SDL_RenderClear( gRenderer );
-
-                    if (new_pressed == true)
+                    if (new_pressed == true)            //Runs a new game;
                     {
-                        bool game_flag = true;
-                        while(game_flag)
+                        bool game_flag = true;          //For checking when to go out of the game to main menu
+                        game_Music.replay();            //Plays game music from the start
+                        while(game_flag)                //New game loop
                         {
-                            fu.set_Viewport();
-                            screen_Texture=yard.ss_Texture;
-                            SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
+                            game_Music.play_Music();      //Plays Music
 
-
-
-                            for (int i=0; i<5;i++)
+                            for (int i=0; i<5;i++)          //Condition to choose the texture for each tile
                             {
                                 for (int j=0; j<9;j++)
                                 {
@@ -380,24 +460,65 @@ int main( int argc, char* args[] )
                                     {
                                         screen_Texture = dark_Lawn.ss_Texture;
                                     }
+
                                     SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
-
-
-
-
                                 }
                             }
 
+                            sslot.set_Viewport();                   //Set viewport for seed slot
+                            screen_Texture = seed_Slot.ss_Texture;
+                            SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
 
+                            sunslot.set_Viewport();                 //Set viewport for sunplant card
+                            screen_Texture = sun_Plantcard.ss_Texture;
+                            SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
 
+                            pslot.set_Viewport();                   //Set viewport for pea plant card
+                            screen_Texture = pea_Plantcard.ss_Texture;
+                            SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
 
-                            SDL_RenderPresent( gRenderer );
-                            SDL_RenderClear(gRenderer);
-                            SDL_Delay(5000);
+                            chompslot.set_Viewport();               //Set viewport for chomper plant card
+                            screen_Texture = chomper_plantcard.ss_Texture;
+                            SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
+
+                            shovelslot.set_Viewport();              ////Set viewport for shovel
+                            screen_Texture = shovel_card.ss_Texture;
+                            SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
+
+                            //Converts the int sun_count to string sun_count to render on screen
+                            stringstream ss;
+                            ss << suns_Num;
+                            str_SunNum = ss.str();
+
+                            if (suns_Num>=0 && suns_Num<10)     //Condition for setting viewport for 1-digit sun count
+                            {
+                                scount_1Digit.set_Viewport();
+                                screen_Texture = sun_count.loadMedia(str_SunNum,black_color,roboto_Font);
+                                SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
+                            }
+
+                            else if (suns_Num>=10 && suns_Num <100)     //Condition for setting viewport for 2-digit sun count
+                            {
+                                scount_2Digit.set_Viewport();
+                                screen_Texture = sun_count.loadMedia(str_SunNum,black_color,roboto_Font);
+                                SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
+                            }
+
+                            else       //Condition for setting viewport for 3-digit sun count
+                            {
+                                scount_3Digit.set_Viewport();
+                                screen_Texture = sun_count.loadMedia(str_SunNum,black_color,roboto_Font);
+                                SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
+                            }
+
+                            update_Screen();        //Updates the screen
+                            SDL_Delay(7000);        //Delay for testinf
+
                             break;
-
                         }
+
                         new_pressed = false;
+                        mainMenu_Music.replay();        //Starts main menu music from the beginning
                     }
 
                     if (exit_pressed == true)
@@ -405,10 +526,9 @@ int main( int argc, char* args[] )
                         quit = true;
                     }
 
-
-
                     while( SDL_PollEvent( &e ) != 0 )
                     {
+
                         //User requests quit
                         if( e.type == SDL_QUIT )
                         {
@@ -417,18 +537,19 @@ int main( int argc, char* args[] )
 
                         else if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
                         {
-                            SDL_GetMouseState(&mouse_x, &mouse_y);      // store mouse coordinates
-
+                            SDL_GetMouseState(&mouse_x, &mouse_y);                   // store mouse coordinates
 
                                 if (ne.isOn(mouse_x, mouse_y) == true)
                                     {
                                         if(e.type == SDL_MOUSEBUTTONDOWN)
                                         {
+                                            button_ClickMusic.play_Sound();         //Plays click sounds
                                             if(e.button.button == SDL_BUTTON_LEFT)
                                             {
                                                 new_pressed = true;
                                                 exit_pressed = false;
                                                 load_pressed = false;
+
                                             }
                                         }
                                         else
@@ -444,6 +565,7 @@ int main( int argc, char* args[] )
                                     {
                                         if(e.type == SDL_MOUSEBUTTONDOWN)
                                         {
+                                            button_ClickMusic.play_Sound();         //Plays click sound
                                             if(e.button.button == SDL_BUTTON_LEFT)
                                             {
                                                 exit_pressed = true;
@@ -464,6 +586,7 @@ int main( int argc, char* args[] )
                                     {
                                         if(e.type == SDL_MOUSEBUTTONDOWN)
                                         {
+                                            button_ClickMusic.play_Sound();     //Plays click sound
                                             if(e.button.button == SDL_BUTTON_LEFT)
                                             {
                                                 load_pressed = true;

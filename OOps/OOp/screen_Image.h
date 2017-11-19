@@ -7,7 +7,7 @@
 using namespace std;
 
 
-class screen_Image
+class screen_Image              //Basic function is to load textures
 {
     public:
         screen_Image();
