@@ -6,10 +6,22 @@ Sound::Sound(Mix_Chunk *s)
     short_Sound = s;
 }
 
+
 Sound::~Sound()
 {
     //dtor
 }
+
+Sound::Sound()
+{
+
+}
+
+void Sound::set_Sound(Mix_Chunk *s)
+{
+    short_Sound = s;
+}
+
 
 void Sound::load_Sound(string path)
 {

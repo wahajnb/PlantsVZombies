@@ -25,8 +25,7 @@ SDL_Texture* Text_Image::loadMedia(string textureText, SDL_Color textColor,TTF_F
 
 	//Load image at specified path
 	SDL_Surface* textSurface = TTF_RenderText_Solid( gFont, textureText.c_str(), textColor );
-	cout << "yo";
-	if( textSurface == NULL )
+    if( textSurface == NULL )
 	{
 		printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
 	}

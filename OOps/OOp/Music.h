@@ -9,6 +9,7 @@ class Music             //For loading music
 {
     public:
         Music(Mix_Music *, time_t);
+        Music();
         virtual ~Music();
         time_t start_Time;
         time_t end_Time;
@@ -17,6 +18,7 @@ class Music             //For loading music
         void load_Music (string);
         void play_Music ();
         void replay();
+        void set_Music(Mix_Music *m, time_t l);
         bool music_On;
 
     protected:

@@ -9,6 +9,8 @@ class Sound         //For loading sounds
 {
     public:
         Sound(Mix_Chunk *);
+        Sound();
+        void set_Sound(Mix_Chunk *);
         virtual ~Sound();
         Mix_Chunk *short_Sound;
         void load_Sound(string);

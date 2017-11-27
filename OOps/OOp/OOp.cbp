@@ -37,17 +37,33 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf" />
 			<Add directory="G:/mingw/lib" />
 		</Linker>
+		<Unit filename="Main_Menu.cpp" />
+		<Unit filename="Main_Menu.h" />
 		<Unit filename="Music.cpp" />
 		<Unit filename="Music.h" />
+		<Unit filename="New_Game.cpp" />
+		<Unit filename="New_Game.h" />
+		<Unit filename="Pause_Game.cpp" />
+		<Unit filename="Pause_Game.h" />
 		<Unit filename="Region.cpp" />
 		<Unit filename="Region.h" />
 		<Unit filename="Sound.cpp" />
 		<Unit filename="Sound.h" />
+		<Unit filename="Splash_Screen.cpp" />
+		<Unit filename="Splash_Screen.h" />
 		<Unit filename="Text_Image.cpp" />
 		<Unit filename="Text_Image.h" />
+		<Unit filename="chomper_Card.cpp" />
+		<Unit filename="chomper_Card.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="peaPlant_Card.cpp" />
+		<Unit filename="peaPlant_Card.h" />
+		<Unit filename="plant_Card.cpp" />
+		<Unit filename="plant_Card.h" />
 		<Unit filename="screen_Image.cpp" />
 		<Unit filename="screen_Image.h" />
+		<Unit filename="sunFlower_Card.cpp" />
+		<Unit filename="sunFlower_Card.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

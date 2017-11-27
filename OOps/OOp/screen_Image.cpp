@@ -58,3 +58,10 @@ SDL_Texture* screen_Image::loadMedia(string path )
 	return ss_Texture;
 }
 
+void screen_Image::image_Render()
+{
+    location->set_Viewport();
+    SDL_RenderCopy( ss_Rend, ss_Texture, NULL, NULL );
+
+}
+

@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+#include "Region.h"
 
 using namespace std;
 
@@ -16,6 +17,8 @@ class screen_Image              //Basic function is to load textures
         SDL_Renderer* ss_Rend;
         SDL_Texture* ss_Texture;
         SDL_Texture* loadMedia(string);
+        Region* location;
+        void image_Render();
 
     protected:
 

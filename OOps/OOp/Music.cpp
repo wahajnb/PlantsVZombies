@@ -9,6 +9,19 @@ Music::Music(Mix_Music *m, time_t l)
 
 }
 
+void Music::set_Music(Mix_Music *m, time_t l)
+{
+    music_Audio = m;
+    music_length = l;
+    music_On = false;
+
+}
+
+Music::Music()
+{
+
+}
+
 Music::~Music()
 {
     //dtor
