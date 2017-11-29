@@ -13,7 +13,7 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
 
     front_Yard.set_Lawn(gRenderer);
 
-    total_suns = 0;
+    total_suns = 350;
 
     game_Music.set_Music(gMusic,320);
     game_Music.load_Music("soundtracks/day_soundtrack.wav");
@@ -25,6 +25,7 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
     peaPlant_Carry = false;
     sunFlower_Carry = false;
     chomper_Carry = false;
+    shovel_Carry = false;
 
     p_Card.load_Media(gRenderer,gTexture);
     s_Card.load_Media(gRenderer,gTexture);
@@ -32,11 +33,20 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
 
     full_Screen.set_Coords(gRenderer,0,0,1366,768);                   //fullscreen
     seed_Slot.set_Coords(gRenderer, 10, 0, 600, 120);                 //Seed Slot
-    shovel_Slot.set_Coords(gRenderer,640,0,90,95);                  //Shovel slot
+    shovel_Slot.set_Coords(gRenderer,610,0,90,95);                  //Shovel slot
     pausegame_Region.set_Coords(gRenderer, 1300, 0, 60, 60);  	    //pausegame
     peaplant_root.set_Coords(gRenderer,203, 10, 120,114);
     sunflower_root.set_Coords(gRenderer,120,10,120,114);
     chomper_root.set_Coords(gRenderer,283,10,120,114);
+    temp_shovel.set_Coords(gRenderer,610,0,90,95);
+
+    shovel_card.ss_Rend = gRenderer;
+    shovel_card.location = &shovel_Slot;
+    shovel_card.loadMedia("Gifs/Plants packet/Shovel.png");     //Loading shovel's slot texture
+
+    shovel.ss_Rend = gRenderer;
+    shovel.location = &temp_shovel;
+    shovel.loadMedia("Gifs/plant rooting/shovel.png");     //Loading shovel's texture
 
     pauseGame_Button.ss_Rend = gRenderer;
     pauseGame_Button.location = &pausegame_Region;
@@ -73,7 +83,7 @@ New_Game::~New_Game()
     //dtor
 }
 
-void New_Game::display_NewGame()
+bool New_Game::display_NewGame()
 {
     game_Loop = true;
     while(game_Loop)
@@ -88,11 +98,13 @@ void New_Game::display_NewGame()
             p_Card.display_Card();
             s_Card.display_Card();
             c_Card.display_Card();
+            shovel_card.image_Render();
 
             s_count.set_Suns(total_suns);
             if (e.type == SDL_QUIT)
             {
                 game_Loop = false;
+                return false;
             }
 
             else if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP )
@@ -115,20 +127,26 @@ void New_Game::display_NewGame()
                     pauseGame_Button.image_Render();
                 }
 
-                if(p_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && p_Card.on_Cooldown == false)
+                if(p_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && p_Card.on_Cooldown == false && p_Card.sun_required <= total_suns )
                 {
                     peaPlant_Carry = true;
                 }
 
-                else if (s_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && s_Card.on_Cooldown == false)
+                else if (s_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && s_Card.on_Cooldown == false && s_Card.sun_required <=total_suns)
                 {
                     sunFlower_Carry = true;
                 }
 
-                else if(c_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && c_Card.on_Cooldown == false)
+                else if(c_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && c_Card.on_Cooldown == false && c_Card.sun_required <= total_suns)
                 {
                     chomper_Carry = true;
                 }
+
+                else if (shovel_Slot.is_Pressed(mouse_x,mouse_y,e))
+                {
+                    shovel_Carry = true;
+                }
+
 
                 if (peaPlant_Carry == true)
                 {
@@ -146,6 +164,7 @@ void New_Game::display_NewGame()
                         {
                             front_Yard.return_tile(mouse_x,mouse_y);
                             p_Card.on_Cooldown = true;
+                            total_suns = total_suns - p_Card.sun_required;
                         }
                     }
                 }
@@ -166,6 +185,7 @@ void New_Game::display_NewGame()
                         {
                             front_Yard.return_tile(mouse_x,mouse_y);
                             s_Card.on_Cooldown = true;
+                            total_suns = total_suns - s_Card.sun_required;
                         }
                     }
                 }
@@ -185,14 +205,30 @@ void New_Game::display_NewGame()
                         {
                             front_Yard.return_tile(mouse_x,mouse_y);
                             c_Card.on_Cooldown = true;
-                            cout <<"chomper" << endl;
-
+                            total_suns = total_suns - c_Card.sun_required;
 
                         }
                     }
                 }
 
-
+                else if (shovel_Carry == true)
+                {
+                    if(e.type == SDL_MOUSEMOTION)
+                    {
+                        temp_shovel.area.x = mouse_x-50;
+                        temp_shovel.area.y = mouse_y-50;
+                        shovel.image_Render();
+                    }
+                    else if (e.type == SDL_MOUSEBUTTONUP)
+                    {
+                        shovel_Carry = false;
+                        if(front_Yard.inLawn(mouse_x,mouse_y) == true)
+                        {
+                            cout <<"yo" << endl;
+                            front_Yard.uproot(mouse_x,mouse_y);
+                        }
+                    }
+                }
             }
 
             //Update screen

@@ -27,7 +27,7 @@ class New_Game
         sun_Count s_count;
         int total_suns;
 
-        void display_NewGame();
+        bool display_NewGame();
 
         SDL_Event e;
         int mouse_x;
@@ -43,6 +43,7 @@ class New_Game
         bool peaPlant_Carry;
         bool sunFlower_Carry;
         bool chomper_Carry;
+        bool shovel_Carry;
 
         bool game_Loop ;
 
@@ -53,6 +54,7 @@ class New_Game
         Region peaplant_root;
         Region sunflower_root;
         Region chomper_root;
+        Region temp_shovel;
 
         screen_Image pauseGame_Button;
         screen_Image pauseGame_ButtonOn;
@@ -61,6 +63,8 @@ class New_Game
         screen_Image peaplant_rooting;
         screen_Image sunflower_rooting;
         screen_Image chomper_rooting;
+        screen_Image shovel_card;
+        screen_Image shovel;
 
         Lawn front_Yard;
 

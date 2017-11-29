@@ -23,6 +23,7 @@ class plant_Card
         bool on_Cooldown;
         int total_Time;
         int taken_Time;
+        int sun_required;
 
         virtual ~plant_Card();
 

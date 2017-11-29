@@ -15,7 +15,9 @@ void chomper_Card::load_Media(SDL_Renderer* r, SDL_Texture* t)
     gRenderer = r;
     gTexture = t;
 
-    total_Time = 300;
+    sun_required = 150;
+
+    total_Time = 200;
     taken_Time = 0;
 
     on_Cooldown = false;

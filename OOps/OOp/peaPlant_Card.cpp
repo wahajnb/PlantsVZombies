@@ -15,6 +15,7 @@ void peaPlant_Card::load_Media(SDL_Renderer* r, SDL_Texture* t)
 {
     gRenderer = r;
     gTexture = t;
+    sun_required = 100;
 
     on_Cooldown = false;
     total_Time = 100;
@@ -41,7 +42,6 @@ peaPlant_Card::peaPlant_Card(SDL_Renderer* r, SDL_Texture* t)
 {
     gRenderer = r;
     gTexture = t;
-
     on_Cooldown = false;
 
     card_Region.set_Coords(gRenderer,203, 10, 73,100);          //Pea plant slot

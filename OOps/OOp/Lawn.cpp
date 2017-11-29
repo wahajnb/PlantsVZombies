@@ -57,3 +57,30 @@ bool Lawn::onLawn(int a, int b)
         }
     return false;
 }
+
+bool Lawn::inLawn(int a, int b)
+{
+    for (int i=0; i<5; i++)
+        {
+            for (int j=0; j<9; j++)
+            {
+                if (lawn_Tiles[i][j].onLawn(a,b) == true)
+                    return true;
+            }
+        }
+    return false;
+}
+
+void Lawn::uproot(int l, int m)
+{
+    for (int i=0; i<5; i++)
+        {
+            for (int j=0; j<9; j++)
+            {
+                if (lawn_Tiles[i][j].onLawn(l,m) == true)
+                    {
+                        lawn_Tiles[i][j].lawn_Occupied = false;
+                    }
+            }
+        }
+}

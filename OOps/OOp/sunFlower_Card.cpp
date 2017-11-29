@@ -10,6 +10,7 @@ void sunFlower_Card::load_Media(SDL_Renderer* r, SDL_Texture* t)
     gRenderer = r;
     gTexture = t;
 
+    sun_required = 50;
     total_Time = 40;
     taken_Time = 0;
 
