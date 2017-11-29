@@ -11,6 +11,8 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
     gRenderer = r;
     gTexture = t;
 
+    front_Yard.set_Lawn(gRenderer);
+
     total_suns = 0;
 
     game_Music.set_Music(gMusic,320);
@@ -32,10 +34,25 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
     seed_Slot.set_Coords(gRenderer, 10, 0, 600, 120);                 //Seed Slot
     shovel_Slot.set_Coords(gRenderer,640,0,90,95);                  //Shovel slot
     pausegame_Region.set_Coords(gRenderer, 1300, 0, 60, 60);  	    //pausegame
+    peaplant_root.set_Coords(gRenderer,203, 10, 120,114);
+    sunflower_root.set_Coords(gRenderer,120,10,120,114);
+    chomper_root.set_Coords(gRenderer,283,10,120,114);
 
     pauseGame_Button.ss_Rend = gRenderer;
     pauseGame_Button.location = &pausegame_Region;
     pauseGame_Button.loadMedia("Gifs/Menu Items/pause.png");         //Loading pause game button texture
+
+    peaplant_rooting.ss_Rend = gRenderer;
+    peaplant_rooting.location = &peaplant_root;
+    peaplant_rooting.loadMedia("Gifs/plant rooting/pea_Plant1.png");
+
+    sunflower_rooting.ss_Rend = gRenderer;
+    sunflower_rooting.location = &sunflower_root;
+    sunflower_rooting.loadMedia("Gifs/plant rooting/sun_Plant.png");
+
+    chomper_rooting.ss_Rend = gRenderer;
+    chomper_rooting.location = &chomper_root;
+    chomper_rooting.loadMedia("Gifs/plant rooting/chomper.png");
 
     pauseGame_ButtonOn.ss_Rend = gRenderer;
     pauseGame_ButtonOn.location = &pausegame_Region;
@@ -61,6 +78,7 @@ void New_Game::display_NewGame()
     game_Loop = true;
     while(game_Loop)
     {
+
             SDL_PollEvent( &e );
             game_Music.play_Music();
 
@@ -97,13 +115,85 @@ void New_Game::display_NewGame()
                     pauseGame_Button.image_Render();
                 }
 
+                if(p_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && p_Card.on_Cooldown == false)
+                {
+                    peaPlant_Carry = true;
+                }
+
+                else if (s_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && s_Card.on_Cooldown == false)
+                {
+                    sunFlower_Carry = true;
+                }
+
+                else if(c_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && c_Card.on_Cooldown == false)
+                {
+                    chomper_Carry = true;
+                }
+
+                if (peaPlant_Carry == true)
+                {
+                    if(e.type == SDL_MOUSEMOTION)
+                    {
+                        peaplant_root.area.x = mouse_x-50;
+                        peaplant_root.area.y = mouse_y-50;
+                        peaplant_rooting.image_Render();
+                    }
+                    else if (e.type == SDL_MOUSEBUTTONUP)
+                    {
+                        peaPlant_Carry = false;
+
+                        if(front_Yard.onLawn(mouse_x,mouse_y) == true)
+                        {
+                            front_Yard.return_tile(mouse_x,mouse_y);
+                            p_Card.on_Cooldown = true;
+                        }
+                    }
+                }
+
+                else if (sunFlower_Carry == true)
+                {
+                    if(e.type == SDL_MOUSEMOTION)
+                    {
+                        sunflower_root.area.x = mouse_x-50;
+                        sunflower_root.area.y = mouse_y-50;
+                        sunflower_rooting.image_Render();
+                    }
+                    else if (e.type == SDL_MOUSEBUTTONUP)
+                    {
+                        sunFlower_Carry = false;
+
+                        if(front_Yard.onLawn(mouse_x,mouse_y) == true)
+                        {
+                            front_Yard.return_tile(mouse_x,mouse_y);
+                            s_Card.on_Cooldown = true;
+                        }
+                    }
+                }
+
+                else if (chomper_Carry == true)
+                {
+                    if(e.type == SDL_MOUSEMOTION)
+                    {
+                        chomper_root.area.x = mouse_x-50;
+                        chomper_root.area.y = mouse_y-50;
+                        chomper_rooting.image_Render();
+                    }
+                    else if (e.type == SDL_MOUSEBUTTONUP)
+                    {
+                        chomper_Carry = false;
+                        if(front_Yard.onLawn(mouse_x,mouse_y) == true)
+                        {
+                            front_Yard.return_tile(mouse_x,mouse_y);
+                            c_Card.on_Cooldown = true;
+                            cout <<"chomper" << endl;
+
+
+                        }
+                    }
+                }
+
 
             }
-
-
-
-
-
 
             //Update screen
             SDL_RenderPresent( gRenderer );

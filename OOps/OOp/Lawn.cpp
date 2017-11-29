@@ -29,7 +29,31 @@ void Lawn::set_Lawn(SDL_Renderer* r)
         }
 }
 
-Region* Lawn::ret_tile()
+Region Lawn::return_tile(int x, int y)
 {
+    for (int i=0; i<5; i++)
+        {
+            for (int j=0; j<9; j++)
+            {
+                if (lawn_Tiles[i][j].onLawn(x,y) == true)
+                    {
+                        lawn_Tiles[i][j].lawn_Occupied = true;
+                        return lawn_Tiles[i][j];
+                    }
 
+            }
+        }
+}
+
+bool Lawn::onLawn(int a, int b)
+{
+    for (int i=0; i<5; i++)
+        {
+            for (int j=0; j<9; j++)
+            {
+                if (lawn_Tiles[i][j].onLawn(a,b) == true && lawn_Tiles[i][j].lawn_Occupied == false)
+                    return true;
+            }
+        }
+    return false;
 }

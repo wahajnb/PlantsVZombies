@@ -12,6 +12,7 @@
 #include "chomper_Card.h"
 #include "sun_Count.h"
 #include "Pause_Game.h"
+#include "Lawn.h"
 
 
 class New_Game
@@ -47,15 +48,21 @@ class New_Game
 
         Region full_Screen;
         Region seed_Slot;
-
         Region shovel_Slot;
-
         Region pausegame_Region;
+        Region peaplant_root;
+        Region sunflower_root;
+        Region chomper_root;
 
         screen_Image pauseGame_Button;
         screen_Image pauseGame_ButtonOn;
         screen_Image slot_area;
         screen_Image yard;
+        screen_Image peaplant_rooting;
+        screen_Image sunflower_rooting;
+        screen_Image chomper_rooting;
+
+        Lawn front_Yard;
 
         Pause_Game *p_Menu;
         virtual ~New_Game();

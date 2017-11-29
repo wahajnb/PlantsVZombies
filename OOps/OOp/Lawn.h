@@ -10,7 +10,8 @@ class Lawn
         SDL_Renderer *gRenderer;
         void set_Lawn(SDL_Renderer*);
         Region lawn_Tiles[5][9];     //lawn tiles array
-        Region* ret_tile();
+        bool onLawn(int,int);
+        Region return_tile(int,int);
         int x_Lawn;
         int y_Lawn;
 

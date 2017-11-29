@@ -93,6 +93,8 @@ void Main_Menu::display_MainMenu()
                     newGame_ButtonPress.image_Render();
                     button_Press.play_Sound();
                     game_Start->display_NewGame();
+                    menu_Screen.image_Render();
+                    newGame_Button.image_Render();
                 }
 
                 else if (newGame_Button.location->isOn(mouse_x,mouse_y) == true)
