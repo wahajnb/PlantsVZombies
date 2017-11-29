@@ -39,6 +39,10 @@ class New_Game
         sunFlower_Card s_Card;
         chomper_Card c_Card;
 
+        bool peaPlant_Carry;
+        bool sunFlower_Carry;
+        bool chomper_Carry;
+
         bool game_Loop ;
 
         Region full_Screen;
@@ -52,7 +56,6 @@ class New_Game
         screen_Image pauseGame_ButtonOn;
         screen_Image slot_area;
         screen_Image yard;
-
 
         Pause_Game *p_Menu;
         virtual ~New_Game();

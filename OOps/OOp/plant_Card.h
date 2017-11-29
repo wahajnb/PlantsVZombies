@@ -20,11 +20,9 @@ class plant_Card
 
         Region card_Region;
 
-        time_t start_Time;
-        time_t end_Time;
-        time_t cooldown;
-
         bool on_Cooldown;
+        int total_Time;
+        int taken_Time;
 
         virtual ~plant_Card();
 

@@ -37,6 +37,8 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf" />
 			<Add directory="G:/mingw/lib" />
 		</Linker>
+		<Unit filename="Lawn.cpp" />
+		<Unit filename="Lawn.h" />
 		<Unit filename="Main_Menu.cpp" />
 		<Unit filename="Main_Menu.h" />
 		<Unit filename="Music.cpp" />
@@ -64,6 +66,8 @@
 		<Unit filename="screen_Image.h" />
 		<Unit filename="sunFlower_Card.cpp" />
 		<Unit filename="sunFlower_Card.h" />
+		<Unit filename="sun_Count.cpp" />
+		<Unit filename="sun_Count.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -20,6 +20,10 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
 
     game_Loop =  true;
 
+    peaPlant_Carry = false;
+    sunFlower_Carry = false;
+    chomper_Carry = false;
+
     p_Card.load_Media(gRenderer,gTexture);
     s_Card.load_Media(gRenderer,gTexture);
     c_Card.load_Media(gRenderer,gTexture);
@@ -57,9 +61,9 @@ void New_Game::display_NewGame()
     game_Loop = true;
     while(game_Loop)
     {
-        game_Music.play_Music();
-         while( SDL_PollEvent( &e ) != 0 )
-        {
+            SDL_PollEvent( &e );
+            game_Music.play_Music();
+
             yard.image_Render();
             slot_area.image_Render();
             pauseGame_Button.image_Render();
@@ -98,12 +102,15 @@ void New_Game::display_NewGame()
 
 
 
+
+
+
             //Update screen
             SDL_RenderPresent( gRenderer );
 
             //Clears the renderer
             SDL_RenderClear( gRenderer );
-        }
+
 
 
     }

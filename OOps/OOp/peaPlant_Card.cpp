@@ -17,6 +17,8 @@ void peaPlant_Card::load_Media(SDL_Renderer* r, SDL_Texture* t)
     gTexture = t;
 
     on_Cooldown = false;
+    total_Time = 100;
+    taken_Time = 0;
 
     card_Region.set_Coords(gRenderer,203, 10, 73,100);          //Pea plant slot
 
@@ -32,8 +34,6 @@ void peaPlant_Card::load_Media(SDL_Renderer* r, SDL_Texture* t)
         card_State[i].ss_Rend = gRenderer;
         card_State[i].loadMedia(name);
     }
-
-    cooldown = 9;
 
 }
 
@@ -58,8 +58,6 @@ peaPlant_Card::peaPlant_Card(SDL_Renderer* r, SDL_Texture* t)
         card_State[i].loadMedia(name);
     }
 
-    cooldown = 9;
-
 }
 
 void peaPlant_Card::display_Card()
@@ -70,26 +68,32 @@ void peaPlant_Card::display_Card()
     }
     else
     {
-        start_Time = time(NULL);
-        if(difftime(end_Time,start_Time) > 0 && difftime(end_Time,start_Time) < 1)
+        if(total_Time-taken_Time > 0 && total_Time-taken_Time < 10)
             card_State[1].image_Render();
-        else if(difftime(end_Time,start_Time) >= 1 && difftime(end_Time,start_Time) < 2)
+        else if(total_Time-taken_Time >= 10 && total_Time-taken_Time < 20)
             card_State[2].image_Render();
-        else if(difftime(end_Time,start_Time) >= 2 && difftime(end_Time,start_Time) < 3)
+        else if(total_Time-taken_Time >= 20 && total_Time-taken_Time < 30)
             card_State[3].image_Render();
-        else if(difftime(end_Time,start_Time) >= 3 && difftime(end_Time,start_Time) < 4)
+        else if(total_Time-taken_Time >= 30 && total_Time-taken_Time < 40)
             card_State[4].image_Render();
-        else if(difftime(end_Time,start_Time) >= 4 && difftime(end_Time,start_Time) < 5)
+        else if(total_Time-taken_Time >= 40 && total_Time-taken_Time < 50)
             card_State[5].image_Render();
-        else if(difftime(end_Time,start_Time) >= 5 && difftime(end_Time,start_Time) < 6)
+        else if(total_Time-taken_Time >= 50 && total_Time-taken_Time < 60)
             card_State[6].image_Render();
-        else if(difftime(end_Time,start_Time) >= 6 && difftime(end_Time,start_Time) < 7)
+        else if(total_Time-taken_Time >= 60 && total_Time-taken_Time < 70)
             card_State[7].image_Render();
-        else if(difftime(end_Time,start_Time) >= 7 && difftime(end_Time,start_Time) < 8)
+        else if(total_Time-taken_Time >= 70 && total_Time-taken_Time < 80)
             card_State[8].image_Render();
-        else if(difftime(end_Time,start_Time) >= 8 && difftime(end_Time,start_Time) < 9)
+        else if(total_Time-taken_Time >= 80 && total_Time-taken_Time < 100)
             card_State[9].image_Render();
 
+        taken_Time ++;
+    }
+
+    if(taken_Time > total_Time)
+    {
+        taken_Time = 0;
+        on_Cooldown = false;
     }
 }
 

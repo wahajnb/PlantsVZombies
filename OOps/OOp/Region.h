@@ -16,6 +16,8 @@ class Region        //Its basic function is to allocate a region on which we wil
         SDL_Renderer* area_Rend;
         bool is_Pressed(int,int,SDL_Event);
         bool isOn(int, int);
+        bool onLawn(int,int);
+        bool lawn_Occupied;
         void set_Viewport();
 
     protected:

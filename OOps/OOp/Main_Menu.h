@@ -45,9 +45,6 @@ class Main_Menu
 
         New_Game *game_Start;
 
-
-
-
         virtual ~Main_Menu();
 
     protected:

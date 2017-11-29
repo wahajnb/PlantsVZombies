@@ -10,6 +10,9 @@ void sunFlower_Card::load_Media(SDL_Renderer* r, SDL_Texture* t)
     gRenderer = r;
     gTexture = t;
 
+    total_Time = 40;
+    taken_Time = 0;
+
     on_Cooldown = false;
 
     card_Region.set_Coords(gRenderer,120, 10, 73,100);          //Pea plant slot
@@ -27,8 +30,6 @@ void sunFlower_Card::load_Media(SDL_Renderer* r, SDL_Texture* t)
         card_State[i].loadMedia(name);
     }
 
-    cooldown = 4;
-
 }
 
 sunFlower_Card::~sunFlower_Card()
@@ -44,14 +45,21 @@ void sunFlower_Card::display_Card()
     }
     else
     {
-        start_Time = time(NULL);
-        if(difftime(end_Time,start_Time) > 0 && difftime(end_Time,start_Time) < 1)
+        if(total_Time-taken_Time > 0 && total_Time-taken_Time < 10)
             card_State[1].image_Render();
-        else if(difftime(end_Time,start_Time) >= 1 && difftime(end_Time,start_Time) < 2)
+        else if(total_Time-taken_Time >= 10 && total_Time-taken_Time < 20)
             card_State[2].image_Render();
-        else if(difftime(end_Time,start_Time) >= 2 && difftime(end_Time,start_Time) < 3)
+        else if(total_Time-taken_Time >= 20 && total_Time-taken_Time < 30)
             card_State[3].image_Render();
-        else if(difftime(end_Time,start_Time) >= 3 && difftime(end_Time,start_Time) < 4)
+        else if(total_Time-taken_Time >= 30 && total_Time-taken_Time < 40)
             card_State[4].image_Render();
+
+        taken_Time ++;
+    }
+
+    if(taken_Time > total_Time)
+    {
+        taken_Time = 0;
+        on_Cooldown = false;
     }
 }

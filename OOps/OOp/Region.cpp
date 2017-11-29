@@ -69,6 +69,18 @@ bool Region::is_Pressed(int x1, int y1, SDL_Event se)
 
 }
 
+bool Region::onLawn(int x, int y)
+{
+    if ((x > area.x+2 && x < area.x+area.w-2 ) && (y > area.y+2 && y < area.y+area.h-2) )
+       {
+         return true;
+       }
+    else
+    {
+        return false;
+    }
+}
+
 void Region::set_Coords (SDL_Renderer* real,int x, int y, int w, int h)
 {
     area_Rend = real;
