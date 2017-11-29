@@ -9,7 +9,8 @@ Sound::Sound(Mix_Chunk *s)
 
 Sound::~Sound()
 {
-    //dtor
+    Mix_FreeChunk(short_Sound);
+    short_Sound = NULL;
 }
 
 Sound::Sound()

@@ -9,7 +9,7 @@ Music::Music(Mix_Music *m, time_t l)
 
 }
 
-void Music::set_Music(Mix_Music *m, time_t l)
+void Music::set_Music(Mix_Music *m, time_t l)       //sets the music length and the music to play
 {
     music_Audio = m;
     music_length = l;
@@ -24,10 +24,11 @@ Music::Music()
 
 Music::~Music()
 {
-    //dtor
+    Mix_FreeMusic(music_Audio);
+    music_Audio = NULL;
 }
 
-void Music::load_Music(string path)
+void Music::load_Music(string path)                 //Loads the music
 {
     music_Audio = Mix_LoadMUS( path.c_str() );
     if( music_Audio == NULL )

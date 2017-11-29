@@ -16,6 +16,7 @@ Text_Image::~Text_Image()
 {
     SDL_DestroyTexture( ss_Texture );
 	ss_Texture = NULL;
+	cout <<"Text texture destroyed" << endl;
 }
 
 SDL_Texture* Text_Image::loadMedia(string textureText, SDL_Color textColor,TTF_Font* gFont )
@@ -36,8 +37,7 @@ SDL_Texture* Text_Image::loadMedia(string textureText, SDL_Color textColor,TTF_F
         ss_Texture = SDL_CreateTextureFromSurface(ss_Rend, textSurface );
 		if( ss_Texture == NULL )
 		{
-		    cout << "wtf" << endl;
-			printf( "Unable to create texture from rendered text %s! SDL Error: %s\n",textureText.c_str(), SDL_GetError() );
+            printf( "Unable to create texture from rendered text %s! SDL Error: %s\n",textureText.c_str(), SDL_GetError() );
 		}
 
 		//Get rid of old surface
@@ -48,8 +48,6 @@ SDL_Texture* Text_Image::loadMedia(string textureText, SDL_Color textColor,TTF_F
 	{
 		printf( "Failed to load texture image!\n" );
     }
-
-
 
 	return ss_Texture;
 }

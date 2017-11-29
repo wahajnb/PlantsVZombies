@@ -43,10 +43,6 @@ SDL_Texture* screen_Texture=NULL;
 //The font to be used
 TTF_Font* roboto_Font = NULL;
 
-//Sound effects that will be used
-Mix_Music *gMusic = NULL;
-Mix_Chunk *bpress_Music = NULL;
-
 //The color to be used
 SDL_Color black_color ;
 
@@ -111,19 +107,6 @@ bool init()
 					printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
 					success = false;
 				}
-
-				roboto_Font= TTF_OpenFont("Fonts/Roboto/Roboto-Bold.ttf", 100);         //Initializing roboto font
-
-                if( roboto_Font == NULL )
-                {
-                    printf( "Failed to load roboto font! SDL_ttf Error: %s\n", TTF_GetError() );
-                    success = false;
-                }
-                else
-                {
-                    black_color = { 0, 0, 0 };          //Initializing color
-
-                }
 			}
 		}
 	}
@@ -131,47 +114,18 @@ bool init()
 	return success;
 }
 
-
-void update_Screen()
-{
-
-
-    //Render texture to screen
-    SDL_RenderCopy( gRenderer, screen_Texture, NULL, NULL );
-
-    //Update screen
-    SDL_RenderPresent( gRenderer );
-
-    //Clears the renderer
-    SDL_RenderClear( gRenderer );
-
-}
-
 void close()
 {
-    //Free global font
-    TTF_CloseFont( roboto_Font );
-	roboto_Font = NULL;
-
-	//Free the sound effects
-	Mix_FreeChunk(bpress_Music);
-	bpress_Music = NULL;
-
-	//Free the music
-	Mix_FreeMusic(gMusic);
-	gMusic = NULL;
-
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
+	SDL_DestroyTexture( screen_Texture );
+
+	screen_Texture = NULL;
 	gWindow = NULL;
 	gRenderer = NULL;
 
-	//Free loaded image
-	SDL_DestroyTexture( screen_Texture );
-	screen_Texture = NULL;
-
-	//Quit SDL subsystems
+    //Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
 	TTF_Quit();
@@ -186,18 +140,23 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
-	    //Loading Main menu music
-        Splash_Screen h(gRenderer,screen_Texture);
-        Main_Menu m(gRenderer,screen_Texture);
-        New_Game n(gRenderer,screen_Texture);
-        Pause_Game p(gRenderer,screen_Texture);
-       // peaPlant_Card p(gRenderer,screen_Texture);
-        m.game_Start = &n;
-        n.p_Menu = &p;
+        Splash_Screen h(gRenderer,screen_Texture);          //Initializing splash screen
 
+        Main_Menu m(gRenderer,screen_Texture);              //Initializing main menu
 
-        h.splash_Display();
-        m.display_MainMenu();
+        New_Game n(gRenderer,screen_Texture);               //Initializing new game
+
+        Pause_Game p(gRenderer,screen_Texture);             //Initializing pause game screen
+
+        m.game_Start = &n;          //storing new game address in main menu game start pointer
+
+        n.p_Menu = &p;              //soring pause game screen address in new game p_menu pointer
+
+        h.splash_Display();         //displays the splash screen
+
+        m.display_MainMenu();       //display the main menu
+
+        close();
 
 
 	}

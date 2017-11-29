@@ -7,7 +7,8 @@ sun_Count::sun_Count()
 
 sun_Count::~sun_Count()
 {
-    //dtor
+  /*  TTF_CloseFont( roboto_Font );
+	roboto_Font = NULL; */
 }
 
 void sun_Count::load_Media(SDL_Renderer *r, SDL_Texture *l)
