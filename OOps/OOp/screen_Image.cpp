@@ -10,6 +10,7 @@ screen_Image::screen_Image()
 {
     ss_Rend = NULL;
     ss_Texture = NULL;
+    pick = false;
 }
 
 screen_Image::screen_Image(SDL_Renderer* real)

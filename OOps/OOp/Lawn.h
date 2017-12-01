@@ -1,6 +1,7 @@
 #ifndef LAWN_H
 #define LAWN_H
 #include "Region.h"
+#include "Sound.h"
 
 
 class Lawn
@@ -16,6 +17,9 @@ class Lawn
         void uproot(int,int);
         int x_Lawn;
         int y_Lawn;
+
+        Mix_Chunk* shove_sound = NULL;
+        Sound shovel_plant;
 
         virtual ~Lawn();
 

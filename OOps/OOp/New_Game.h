@@ -13,7 +13,7 @@
 #include "sun_Count.h"
 #include "Pause_Game.h"
 #include "Lawn.h"
-
+#include "Sun.h"
 
 class New_Game
 {
@@ -36,6 +36,9 @@ class New_Game
         Mix_Music* gMusic = NULL;
         Music game_Music;
 
+        Mix_Chunk* psound = NULL;
+        Sound plant_Place;
+
         peaPlant_Card p_Card;
         sunFlower_Card s_Card;
         chomper_Card c_Card;
@@ -46,6 +49,8 @@ class New_Game
         bool shovel_Carry;
 
         bool game_Loop ;
+
+        Sun a;
 
         Region full_Screen;
         Region seed_Slot;

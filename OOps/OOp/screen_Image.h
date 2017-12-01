@@ -18,6 +18,11 @@ class screen_Image              //Basic function is to load textures
         SDL_Texture* ss_Texture;
         SDL_Texture* loadMedia(string);
         Region* location;
+        float start_x;
+        float start_y;
+        int end_x;
+        int end_y;
+        bool pick;
         void image_Render();
 
     protected:

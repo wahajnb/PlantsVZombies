@@ -11,9 +11,12 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
     gRenderer = r;
     gTexture = t;
 
+    plant_Place.set_Sound(psound);
+    plant_Place.load_Sound("Soundtracks/plant_placement.wav");
+
     front_Yard.set_Lawn(gRenderer);
 
-    total_suns = 350;
+    total_suns = 0;
 
     game_Music.set_Music(gMusic,320);
     game_Music.load_Music("soundtracks/day_soundtrack.wav");
@@ -76,6 +79,8 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
     slot_area.location = &seed_Slot;
     slot_area.loadMedia("Gifs/Plants packet/SeedBank.png");     //Loading seed slot texture
 
+    a.sun_setcoord(gRenderer);
+
 }
 
 New_Game::~New_Game()
@@ -91,7 +96,7 @@ bool New_Game::display_NewGame()
 
             SDL_PollEvent( &e );
             game_Music.play_Music();
-
+            a.produce_Sun();
             yard.image_Render();
             slot_area.image_Render();
             pauseGame_Button.image_Render();
@@ -99,6 +104,10 @@ bool New_Game::display_NewGame()
             s_Card.display_Card();
             c_Card.display_Card();
             shovel_card.image_Render();
+            if (a.show_Sun() == true)
+            {
+                total_suns = total_suns + 25;
+            }
 
             s_count.set_Suns(total_suns);
             if (e.type == SDL_QUIT)
@@ -111,10 +120,12 @@ bool New_Game::display_NewGame()
             {
 
                 SDL_GetMouseState(&mouse_x,&mouse_y);
+                a.collect_Sun(mouse_x,mouse_y, e);
+
                 if (pauseGame_Button.location->is_Pressed(mouse_x,mouse_y,e) == true)
                 {
                   //  button_Press.play_Sound();
-                  p_Menu->display_PauseMenu();
+                    p_Menu->display_PauseMenu();
                 }
 
                 else if (pauseGame_Button.location->isOn(mouse_x,mouse_y) == true)
@@ -165,6 +176,7 @@ bool New_Game::display_NewGame()
                             front_Yard.return_tile(mouse_x,mouse_y);
                             p_Card.on_Cooldown = true;
                             total_suns = total_suns - p_Card.sun_required;
+                            plant_Place.play_Sound();
                         }
                     }
                 }
@@ -186,6 +198,7 @@ bool New_Game::display_NewGame()
                             front_Yard.return_tile(mouse_x,mouse_y);
                             s_Card.on_Cooldown = true;
                             total_suns = total_suns - s_Card.sun_required;
+                            plant_Place.play_Sound();
                         }
                     }
                 }
@@ -206,6 +219,7 @@ bool New_Game::display_NewGame()
                             front_Yard.return_tile(mouse_x,mouse_y);
                             c_Card.on_Cooldown = true;
                             total_suns = total_suns - c_Card.sun_required;
+                            plant_Place.play_Sound();
 
                         }
                     }
@@ -237,7 +251,6 @@ bool New_Game::display_NewGame()
             //Clears the renderer
             SDL_RenderClear( gRenderer );
 
-
-
     }
+    return false;
 }

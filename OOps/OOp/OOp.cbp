@@ -53,6 +53,8 @@
 		<Unit filename="Sound.h" />
 		<Unit filename="Splash_Screen.cpp" />
 		<Unit filename="Splash_Screen.h" />
+		<Unit filename="Sun.cpp" />
+		<Unit filename="Sun.h" />
 		<Unit filename="Text_Image.cpp" />
 		<Unit filename="Text_Image.h" />
 		<Unit filename="chomper_Card.cpp" />

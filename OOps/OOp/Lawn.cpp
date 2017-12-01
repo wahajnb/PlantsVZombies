@@ -15,6 +15,10 @@ void Lawn::set_Lawn(SDL_Renderer* r)
     gRenderer = r;
     x_Lawn = 13;
     y_Lawn = 105;
+
+    shovel_plant.set_Sound(shove_sound);
+    shovel_plant.load_Sound("Soundtracks/Shovel.wav");
+
     for (int i=0; i<5; i++)
         {
             for (int j=0; j<9; j++)
@@ -79,7 +83,11 @@ void Lawn::uproot(int l, int m)
             {
                 if (lawn_Tiles[i][j].onLawn(l,m) == true)
                     {
-                        lawn_Tiles[i][j].lawn_Occupied = false;
+                        if (lawn_Tiles[i][j].lawn_Occupied == true)
+                            {
+                                lawn_Tiles[i][j].lawn_Occupied = false;
+                                shovel_plant.play_Sound();
+                            }
                     }
             }
         }
