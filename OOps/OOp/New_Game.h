@@ -14,6 +14,15 @@
 #include "Pause_Game.h"
 #include "Lawn.h"
 #include "Sun.h"
+#include "LTexture.h"
+#include "Sunflower.h"
+#include "PeaShooter.h"
+#include "Pea.h"
+#include "Chomper.h"
+#include "vector"
+#include "sunFlower_List.h"
+#include "peaPlant_List.h"
+#include "chomper_List.h"
 
 class New_Game
 {
@@ -24,8 +33,8 @@ class New_Game
         SDL_Renderer* gRenderer;
         SDL_Texture* gTexture;
 
-        sun_Count s_count;
-        int total_suns;
+        sun_Count s_count;          //For converting an int to a texture
+        int total_suns;             //Keeps the record of total suns
 
         bool display_NewGame();
 
@@ -50,7 +59,7 @@ class New_Game
 
         bool game_Loop ;
 
-        Sun a;
+        Sun a;          //For creating random suns
 
         Region full_Screen;
         Region seed_Slot;
@@ -60,6 +69,8 @@ class New_Game
         Region sunflower_root;
         Region chomper_root;
         Region temp_shovel;
+        Region temp_plantRegion;
+        Region *temp_plantShove;
 
         screen_Image pauseGame_Button;
         screen_Image pauseGame_ButtonOn;
@@ -72,6 +83,16 @@ class New_Game
         screen_Image shovel;
 
         Lawn front_Yard;
+
+        LTexture SunflowerTexture;
+        LTexture PeaShooterTexture;
+        LTexture SunningTexture;
+        LTexture ChomperTexture;
+        LTexture EatingTexture;
+
+        sunFlower_List s_List;
+        peaPlant_List pp_List;
+        chomper_List c_List;
 
         Pause_Game *p_Menu;
         virtual ~New_Game();

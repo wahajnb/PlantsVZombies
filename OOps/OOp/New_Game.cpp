@@ -5,10 +5,9 @@ New_Game::New_Game()
     //ctor
 }
 
-
 New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
 {
-    gRenderer = r;
+    gRenderer= r;
     gTexture = t;
 
     plant_Place.set_Sound(psound);
@@ -16,7 +15,7 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
 
     front_Yard.set_Lawn(gRenderer);
 
-    total_suns = 0;
+    total_suns = 1000;
 
     game_Music.set_Music(gMusic,320);
     game_Music.load_Music("soundtracks/day_soundtrack.wav");
@@ -81,6 +80,36 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
 
     a.sun_setcoord(gRenderer);
 
+    if( !SunflowerTexture.LoadFromFile( "Gifs/Sunflower/Sunflower.png", gRenderer  ) )
+	{
+		printf( "Failed to load sunflower texture!\n" );
+
+	}
+	if( !PeaShooterTexture.LoadFromFile( "Gifs/Pea plant/Pea Shooter.png", gRenderer  ) )
+	{
+		printf( "Failed to load pea shooter texture!\n" );
+
+	}
+	if( !SunningTexture.LoadFromFile( "Gifs/Sunflower/Sunning.png", gRenderer  ) )
+	{
+		printf( "Failed to load sunning texture!\n" );
+
+	}
+	if( !ChomperTexture.LoadFromFile( "Gifs/Chomper/Chomper moving.png", gRenderer  ) )
+	{
+		printf( "Failed to load chomper moving texture!\n" );
+
+	}
+	if( !EatingTexture.LoadFromFile( "Gifs/Chomper/ChomperEat.png", gRenderer  ) )
+	{
+		printf( "Failed to load eating texture!\n" );
+
+	}
+
+    s_List.get_Renderer(gRenderer);
+    pp_List.get_Renderer(gRenderer);
+    c_List.get_Renderer(gRenderer);
+
 }
 
 New_Game::~New_Game()
@@ -91,6 +120,7 @@ New_Game::~New_Game()
 bool New_Game::display_NewGame()
 {
     game_Loop = true;
+
     while(game_Loop)
     {
 
@@ -103,7 +133,9 @@ bool New_Game::display_NewGame()
             p_Card.display_Card();
             s_Card.display_Card();
             c_Card.display_Card();
+
             shovel_card.image_Render();
+
             if (a.show_Sun() == true)
             {
                 total_suns = total_suns + 25;
@@ -124,7 +156,6 @@ bool New_Game::display_NewGame()
 
                 if (pauseGame_Button.location->is_Pressed(mouse_x,mouse_y,e) == true)
                 {
-                  //  button_Press.play_Sound();
                     p_Menu->display_PauseMenu();
                 }
 
@@ -173,7 +204,9 @@ bool New_Game::display_NewGame()
 
                         if(front_Yard.onLawn(mouse_x,mouse_y) == true)
                         {
-                            front_Yard.return_tile(mouse_x,mouse_y);
+                            temp_plantRegion = front_Yard.return_tile(mouse_x,mouse_y);
+                            PeaShooter* p = new PeaShooter(gRenderer, &PeaShooterTexture, temp_plantRegion.area.x+10, temp_plantRegion.area.y+10);
+                            pp_List.add_peaPlant(p);
                             p_Card.on_Cooldown = true;
                             total_suns = total_suns - p_Card.sun_required;
                             plant_Place.play_Sound();
@@ -195,7 +228,10 @@ bool New_Game::display_NewGame()
 
                         if(front_Yard.onLawn(mouse_x,mouse_y) == true)
                         {
-                            front_Yard.return_tile(mouse_x,mouse_y);
+                           // plant_drop = true;
+                            temp_plantRegion = front_Yard.return_tile(mouse_x,mouse_y);
+                            Sunflower *g = new Sunflower(gRenderer,&SunflowerTexture, &SunningTexture, temp_plantRegion.area.x+10, temp_plantRegion.area.y);
+                            s_List.add_Sunflower(g);
                             s_Card.on_Cooldown = true;
                             total_suns = total_suns - s_Card.sun_required;
                             plant_Place.play_Sound();
@@ -216,7 +252,9 @@ bool New_Game::display_NewGame()
                         chomper_Carry = false;
                         if(front_Yard.onLawn(mouse_x,mouse_y) == true)
                         {
-                            front_Yard.return_tile(mouse_x,mouse_y);
+                            temp_plantRegion = front_Yard.return_tile(mouse_x,mouse_y);
+                            Chomper *c = new Chomper(gRenderer, &ChomperTexture, &EatingTexture, temp_plantRegion.area.x+10, temp_plantRegion.area.y);
+                            c_List.add_chomper(c);
                             c_Card.on_Cooldown = true;
                             total_suns = total_suns - c_Card.sun_required;
                             plant_Place.play_Sound();
@@ -238,18 +276,27 @@ bool New_Game::display_NewGame()
                         shovel_Carry = false;
                         if(front_Yard.inLawn(mouse_x,mouse_y) == true)
                         {
-                            cout <<"yo" << endl;
-                            front_Yard.uproot(mouse_x,mouse_y);
+                            temp_plantShove = NULL;
+                            temp_plantShove = front_Yard.uproot(mouse_x,mouse_y);
+                            pp_List.del_plant(temp_plantRegion.area.x, temp_plantRegion.area.y);
+                            cout <<"bro" << endl;
                         }
                     }
                 }
             }
+
+            full_Screen.set_Viewport();
+            s_List.display();
+            pp_List.display();
+            c_List.display();
 
             //Update screen
             SDL_RenderPresent( gRenderer );
 
             //Clears the renderer
             SDL_RenderClear( gRenderer );
+
+
 
     }
     return false;

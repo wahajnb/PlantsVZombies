@@ -37,6 +37,10 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf" />
 			<Add directory="G:/mingw/lib" />
 		</Linker>
+		<Unit filename="Chomper.cpp" />
+		<Unit filename="Chomper.h" />
+		<Unit filename="LTexture.cpp" />
+		<Unit filename="LTexture.h" />
 		<Unit filename="Lawn.cpp" />
 		<Unit filename="Lawn.h" />
 		<Unit filename="Main_Menu.cpp" />
@@ -47,6 +51,12 @@
 		<Unit filename="New_Game.h" />
 		<Unit filename="Pause_Game.cpp" />
 		<Unit filename="Pause_Game.h" />
+		<Unit filename="Pea.cpp" />
+		<Unit filename="Pea.h" />
+		<Unit filename="PeaShooter.cpp" />
+		<Unit filename="PeaShooter.h" />
+		<Unit filename="Plants.cpp" />
+		<Unit filename="Plants.h" />
 		<Unit filename="Region.cpp" />
 		<Unit filename="Region.h" />
 		<Unit filename="Sound.cpp" />
@@ -55,19 +65,27 @@
 		<Unit filename="Splash_Screen.h" />
 		<Unit filename="Sun.cpp" />
 		<Unit filename="Sun.h" />
+		<Unit filename="Sunflower.cpp" />
+		<Unit filename="Sunflower.h" />
 		<Unit filename="Text_Image.cpp" />
 		<Unit filename="Text_Image.h" />
 		<Unit filename="chomper_Card.cpp" />
 		<Unit filename="chomper_Card.h" />
+		<Unit filename="chomper_List.cpp" />
+		<Unit filename="chomper_List.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="peaPlant_Card.cpp" />
 		<Unit filename="peaPlant_Card.h" />
+		<Unit filename="peaPlant_List.cpp" />
+		<Unit filename="peaPlant_List.h" />
 		<Unit filename="plant_Card.cpp" />
 		<Unit filename="plant_Card.h" />
 		<Unit filename="screen_Image.cpp" />
 		<Unit filename="screen_Image.h" />
 		<Unit filename="sunFlower_Card.cpp" />
 		<Unit filename="sunFlower_Card.h" />
+		<Unit filename="sunFlower_List.cpp" />
+		<Unit filename="sunFlower_List.h" />
 		<Unit filename="sun_Count.cpp" />
 		<Unit filename="sun_Count.h" />
 		<Extensions>

@@ -8,6 +8,7 @@ class chomper_Card : public plant_Card
         chomper_Card();
         void load_Media(SDL_Renderer*, SDL_Texture*);
         void display_Card();
+        void display();
         virtual ~chomper_Card();
 
     protected:

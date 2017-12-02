@@ -9,6 +9,7 @@ class sunFlower_Card: public plant_Card
         virtual ~sunFlower_Card();
         void load_Media(SDL_Renderer*, SDL_Texture*);
         void display_Card();
+        void display();
 
     protected:
 

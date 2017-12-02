@@ -71,3 +71,37 @@ void chomper_Card::display_Card()
         on_Cooldown = false;
     }
 }
+
+void chomper_Card::display()
+{
+    if (on_Cooldown == false)
+    {
+        card_State[0].image_Render();
+    }
+    else
+    {
+        if(total_Time-taken_Time > 0 && total_Time-taken_Time < 10)
+            card_State[0].image_Render();
+        else if(total_Time-taken_Time >= 10 && total_Time-taken_Time < 20)
+            card_State[1].image_Render();
+        else if(total_Time-taken_Time >= 20 && total_Time-taken_Time < 30)
+            card_State[2].image_Render();
+        else if(total_Time-taken_Time >= 30 && total_Time-taken_Time < 40)
+            card_State[3].image_Render();
+        else if(total_Time-taken_Time >= 40 && total_Time-taken_Time < 50)
+            card_State[4].image_Render();
+        else if(total_Time-taken_Time >= 50 && total_Time-taken_Time < 60)
+            card_State[5].image_Render();
+        else if(total_Time-taken_Time >= 60 && total_Time-taken_Time < 500)
+            card_State[6].image_Render();
+
+        taken_Time ++;
+    }
+
+    if(taken_Time > total_Time)
+    {
+        taken_Time = 0;
+        on_Cooldown = false;
+    }
+
+}

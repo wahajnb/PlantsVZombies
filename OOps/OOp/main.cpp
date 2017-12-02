@@ -16,6 +16,8 @@
 #include "New_Game.h"
 #include "peaPlant_Card.h"
 #include "Pause_Game.h"
+#include "LTexture.h"
+#include "Sunflower.h"
 
 
 //Starts up SDL and creates window
@@ -140,7 +142,7 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
-        Splash_Screen h(gRenderer,screen_Texture);          //Initializing splash screen
+        //Splash_Screen h(gRenderer,screen_Texture);          //Initializing splash screen
 
         Main_Menu m(gRenderer,screen_Texture);              //Initializing main menu
 
@@ -152,7 +154,7 @@ int main( int argc, char* args[] )
 
         n.p_Menu = &p;              //soring pause game screen address in new game p_menu pointer
 
-        h.splash_Display();         //displays the splash screen
+        //h.splash_Display();         //displays the splash screen
 
         m.display_MainMenu();       //display the main menu
 
