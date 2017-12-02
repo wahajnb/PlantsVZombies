@@ -363,14 +363,14 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511974513 source:g:\oops project\plantsvszombies\oops\oop\screen_image.cpp
+1512119151 source:g:\oops project\plantsvszombies\oops\oop\screen_image.cpp
 	"screen_Image.h"
 	<SDL.h>
 	<SDL_image.h>
 	<iostream>
 	<stdio.h>
 
-1511438264 g:\oops project\plantsvszombies\oops\oop\screen_image.h
+1512111235 g:\oops project\plantsvszombies\oops\oop\screen_image.h
 	<SDL.h>
 	<SDL_image.h>
 	<iostream>
@@ -399,7 +399,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511976346 source:g:\oops project\plantsvszombies\oops\oop\main.cpp
+1512125900 source:g:\oops project\plantsvszombies\oops\oop\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -446,7 +446,7 @@
 	<iostream>
 	<stdio.h>
 
-1511957411 g:\oops project\plantsvszombies\oops\oop\new_game.h
+1512120626 g:\oops project\plantsvszombies\oops\oop\new_game.h
 	"screen_Image.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -460,8 +460,9 @@
 	"sun_Count.h"
 	"Pause_Game.h"
 	"Lawn.h"
+	"Sun.h"
 
-1511957352 source:g:\oops project\plantsvszombies\oops\oop\new_game.cpp
+1512125958 source:g:\oops project\plantsvszombies\oops\oop\new_game.cpp
 	"New_Game.h"
 
 1511954776 source:g:\oops project\plantsvszombies\oops\oop\chomper_card.cpp
@@ -506,11 +507,12 @@
 1511769774 g:\oops project\plantsvszombies\oops\oop\peaplant_card.h
 	"plant_Card.h"
 
-1511954231 source:g:\oops project\plantsvszombies\oops\oop\lawn.cpp
+1512121163 source:g:\oops project\plantsvszombies\oops\oop\lawn.cpp
 	"Lawn.h"
 
-1511954213 g:\oops project\plantsvszombies\oops\oop\lawn.h
+1512120663 g:\oops project\plantsvszombies\oops\oop\lawn.h
 	"Region.h"
+	"Sound.h"
 
 1511782696 g:\oops project\plantsvszombies\oops\oop\sun_count.h
 	"screen_Image.h"
@@ -518,6 +520,20 @@
 	<sstream>
 	<SDL_ttf.h>
 
-1511976267 source:g:\oops project\plantsvszombies\oops\oop\sun_count.cpp
+1512038380 source:g:\oops project\plantsvszombies\oops\oop\sun_count.cpp
 	"sun_Count.h"
+
+1512124876 g:\oops project\plantsvszombies\oops\oop\sun.h
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	<stdio.h>
+	"screen_Image.h"
+	<vector>
+	<random>
+	"Sound.h"
+
+1512124874 source:g:\oops project\plantsvszombies\oops\oop\sun.cpp
+	"Sun.h"
+	<vector>
 
