@@ -18,7 +18,7 @@ void Lawn::set_Lawn(SDL_Renderer* r)
 
     shovel_plant.set_Sound(shove_sound);
     shovel_plant.load_Sound("Soundtracks/Shovel.wav");
-    dummy_Region.set_Coords(gRenderer,0,0,1,1);
+    dummy_Region.set_Coords(gRenderer,5000,2230,1,1);
 
     for (int i=0; i<5; i++)
         {
@@ -44,6 +44,22 @@ Region Lawn::return_tile(int x, int y)
                     {
                         lawn_Tiles[i][j].lawn_Occupied = true;
                         return lawn_Tiles[i][j];
+                    }
+
+            }
+        }
+}
+
+bool Lawn::ret_occTile(int x,int y)
+{
+   for (int i=0; i<5; i++)
+        {
+            for (int j=0; j<9; j++)
+            {
+                if (lawn_Tiles[i][j].onLawn(x,y) == true)
+                    {
+                       // lawn_Tiles[i][j].lawn_Occupied = true;
+                        return lawn_Tiles[i][j].lawn_Occupied;
                     }
 
             }

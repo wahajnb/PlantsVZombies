@@ -26,7 +26,7 @@ void Sun::sun_setcoord(SDL_Renderer* r)
 
 void Sun::produce_Sun()
 {
-    if (cur_Timer > 10000)
+    if (cur_Timer > 100)
     {
         screen_Image *s = new screen_Image;
         s->ss_Texture = sun_Flow.loadMedia("gifs/Sun/Sun.png");

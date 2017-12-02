@@ -2,6 +2,7 @@
 #define LAWN_H
 #include "Region.h"
 #include "Sound.h"
+#include "Plants.h"
 
 
 class Lawn
@@ -18,6 +19,7 @@ class Lawn
         Region* uproot(int,int);
         int x_Lawn;
         int y_Lawn;
+        bool ret_occTile(int,int);
 
         Mix_Chunk* shove_sound = NULL;
         Sound shovel_plant;

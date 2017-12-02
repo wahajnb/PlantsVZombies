@@ -276,10 +276,15 @@ bool New_Game::display_NewGame()
                         shovel_Carry = false;
                         if(front_Yard.inLawn(mouse_x,mouse_y) == true)
                         {
-                            temp_plantShove = NULL;
-                            temp_plantShove = front_Yard.uproot(mouse_x,mouse_y);
-                            pp_List.del_plant(temp_plantRegion.area.x, temp_plantRegion.area.y);
-                            cout <<"bro" << endl;
+                            if (front_Yard.ret_occTile(mouse_x,mouse_y) == true)
+                            {
+                                temp_plantShove = NULL;
+                                temp_plantShove = front_Yard.uproot(mouse_x,mouse_y);
+                                pp_List.del_plant(temp_plantShove->area.x, temp_plantShove->area.y);
+                                s_List.del_plant(temp_plantShove->area.x, temp_plantShove->area.y);
+                                cout <<"bro" << endl;
+                            }
+
                         }
                     }
                 }

@@ -33,7 +33,7 @@ void peaPlant_List::del_plant(float a, float b)
     cout <<"Kr de" << endl;
     for (auto i = PeaShooter_arr.begin(); i!=PeaShooter_arr.end();i++)
     {
-        if ((*i)->xcord == a + 10 && (*i)->ycord == b + 10)
+        if ((*i)->xcord == (a + 10) && (*i)->ycord == (b + 10))
         {
             delete (*i);
             (*i) -> die();

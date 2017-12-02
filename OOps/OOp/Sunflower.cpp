@@ -78,26 +78,30 @@ Sunflower::Sunflower(SDL_Renderer * gRenderer, LTexture* NImage, LTexture * SIma
 
 void Sunflower::display()
 {
-    if (!sun)
+    if (exists == true)
     {
-        this -> Render(framesxyz[0], gRenderer, false);
-        framesxyz[0] += 0.158;
-        if (framesxyz[0] >= 59.9875)
+            if (!sun)
         {
-            sun = true;
-            framesxyz[0] = 0.5;
+            this -> Render(framesxyz[0], gRenderer, false);
+            framesxyz[0] += 0.158;
+            if (framesxyz[0] >= 59.9875)
+            {
+                sun = true;
+                framesxyz[0] = 0.5;
+            }
+        }
+        else if(sun == true)
+        {
+            this -> Render(framesxyz[1], gRenderer, true);
+            framesxyz[1] += 0.2;
+            if(framesxyz[1] >= 7.9875)
+            {
+                sun = false;
+                framesxyz[1] = 0;
+            }
         }
     }
-    else if(sun == true)
-    {
-        this -> Render(framesxyz[1], gRenderer, true);
-        framesxyz[1] += 0.2;
-        if(framesxyz[1] >= 7.9875)
-        {
-            sun = false;
-            framesxyz[1] = 0;
-        }
-    }
+
 }
 
 /*

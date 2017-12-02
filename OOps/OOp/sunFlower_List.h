@@ -16,6 +16,7 @@ class sunFlower_List
         virtual ~sunFlower_List();
         void display();
         void add_Sunflower(Sunflower*);
+        void del_plant(float,float);
 
     protected:
 
