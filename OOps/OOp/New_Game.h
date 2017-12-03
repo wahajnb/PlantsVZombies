@@ -23,6 +23,9 @@
 #include "sunFlower_List.h"
 #include "peaPlant_List.h"
 #include "chomper_List.h"
+#include "potato_Card.h"
+#include "Wallnut.h"
+#include "potato_List.h"
 
 class New_Game
 {
@@ -50,11 +53,11 @@ class New_Game
 
         peaPlant_Card p_Card;
         sunFlower_Card s_Card;
-        chomper_Card c_Card;
+        potato_Card pt_Card;
 
         bool peaPlant_Carry;
         bool sunFlower_Carry;
-        bool chomper_Carry;
+        bool potato_Carry;
         bool shovel_Carry;
 
         bool game_Loop ;
@@ -67,7 +70,7 @@ class New_Game
         Region pausegame_Region;
         Region peaplant_root;
         Region sunflower_root;
-        Region chomper_root;
+        Region potato_root;
         Region temp_shovel;
         Region temp_plantRegion;
         Region *temp_plantShove;
@@ -78,7 +81,7 @@ class New_Game
         screen_Image yard;
         screen_Image peaplant_rooting;
         screen_Image sunflower_rooting;
-        screen_Image chomper_rooting;
+        screen_Image potato_rooting;
         screen_Image shovel_card;
         screen_Image shovel;
 
@@ -89,10 +92,13 @@ class New_Game
         LTexture SunningTexture;
         LTexture ChomperTexture;
         LTexture EatingTexture;
+        LTexture WallnutTexture;
+        LTexture HitTexture;
+        LTexture MoreHitTexture;
 
         sunFlower_List s_List;
         peaPlant_List pp_List;
-        chomper_List c_List;
+        potato_List pt_List;
 
         Pause_Game *p_Menu;
         virtual ~New_Game();

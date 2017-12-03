@@ -58,7 +58,6 @@ bool Lawn::ret_occTile(int x,int y)
             {
                 if (lawn_Tiles[i][j].onLawn(x,y) == true)
                     {
-                       // lawn_Tiles[i][j].lawn_Occupied = true;
                         return lawn_Tiles[i][j].lawn_Occupied;
                     }
 

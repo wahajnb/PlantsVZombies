@@ -48,9 +48,6 @@ PeaShooter::PeaShooter(SDL_Renderer * gRenderer, LTexture* image, float x, float
 
     this -> width = PeaShooterClips[ 0 ].w;
     this -> height = PeaShooterClips[ 0 ].h;
-
-    pea_Shoot.set_Sound(psound);
-    pea_Shoot.load_Sound("Soundtracks/Throw.wav");
 }
 
 
@@ -74,20 +71,27 @@ PeaShooter::PeaShooter()
 
 void PeaShooter::display()
 {
-    Uint32 ticks = SDL_GetTicks();
-    PeaShooterFrame = (ticks/50)%56;
-    this -> Render(PeaShooterFrame, gRenderer);
-    ++PeaShooterFrame;
-    if (PeaShooterFrame == 29)
+    if(health > 0)
     {
-        delete P1;
-        P1 = new Pea(gRenderer, this -> xcord +100, this -> ycord +35);
-        pea_Shoot.play_Sound();
+        Uint32 ticks = SDL_GetTicks();
+        PeaShooterFrame = (ticks/50)%56;
+        this -> Render(PeaShooterFrame, gRenderer);
+        ++PeaShooterFrame;
+        if (PeaShooterFrame == 29)
+        {
+            delete P1;
+            P1 = new Pea(gRenderer, this -> xcord +100, this -> ycord +35);
+        }
+        if(P1)
+        {
+            P1 -> display();
+        }
     }
-    if(P1)
+    else
     {
-        P1 -> display();
+        this -> die();
     }
+
 }
 
 
@@ -110,7 +114,7 @@ void PeaShooter::IsHit(int damage)
 
 void PeaShooter::Render(Uint32 frame, SDL_Renderer* gRenderer)
 {
-    PeaShooterTexture -> Render( xcord, ycord, 130, 124, &PeaShooterClips[ frame % NormalFrames ], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
+    PeaShooterTexture -> Render( xcord, ycord, 125, 119, &PeaShooterClips[ frame % NormalFrames ], 0.0, NULL, SDL_FLIP_NONE, gRenderer );
 }
 
 

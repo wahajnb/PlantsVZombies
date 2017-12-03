@@ -26,12 +26,12 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
 
     peaPlant_Carry = false;
     sunFlower_Carry = false;
-    chomper_Carry = false;
+    potato_Carry = false;
     shovel_Carry = false;
 
     p_Card.load_Media(gRenderer,gTexture);
     s_Card.load_Media(gRenderer,gTexture);
-    c_Card.load_Media(gRenderer,gTexture);
+    pt_Card.load_Media(gRenderer,gTexture);
 
     full_Screen.set_Coords(gRenderer,0,0,1366,768);                   //fullscreen
     seed_Slot.set_Coords(gRenderer, 10, 0, 600, 120);                 //Seed Slot
@@ -39,7 +39,7 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
     pausegame_Region.set_Coords(gRenderer, 1300, 0, 60, 60);  	    //pausegame
     peaplant_root.set_Coords(gRenderer,203, 10, 120,114);
     sunflower_root.set_Coords(gRenderer,120,10,120,114);
-    chomper_root.set_Coords(gRenderer,283,10,120,114);
+    potato_root.set_Coords(gRenderer,283,10,102,116);
     temp_shovel.set_Coords(gRenderer,610,0,90,95);
 
     shovel_card.ss_Rend = gRenderer;
@@ -62,9 +62,9 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
     sunflower_rooting.location = &sunflower_root;
     sunflower_rooting.loadMedia("Gifs/plant rooting/sun_Plant.png");
 
-    chomper_rooting.ss_Rend = gRenderer;
-    chomper_rooting.location = &chomper_root;
-    chomper_rooting.loadMedia("Gifs/plant rooting/chomper.png");
+    potato_rooting.ss_Rend = gRenderer;
+    potato_rooting.location = &potato_root;
+    potato_rooting.loadMedia("Gifs/plant rooting/pot.png");
 
     pauseGame_ButtonOn.ss_Rend = gRenderer;
     pauseGame_ButtonOn.location = &pausegame_Region;
@@ -106,9 +106,25 @@ New_Game::New_Game(SDL_Renderer* r, SDL_Texture* t)
 
 	}
 
+	if( !WallnutTexture.LoadFromFile( "Gifs/Potato/Wallnut.png", gRenderer  ) )
+	{
+		printf( "Failed to load sunning texture!\n" );
+
+	}
+	if( !HitTexture.LoadFromFile( "Gifs/Potato/Wallnut hit.png", gRenderer  ) )
+	{
+		printf( "Failed to load chomper moving texture!\n" );
+
+	}
+	if( !MoreHitTexture.LoadFromFile( "Gifs/Potato/Wallnut more hit.png", gRenderer  ) )
+	{
+		printf( "Failed to load eating texture!\n" );
+
+	}
+
     s_List.get_Renderer(gRenderer);
     pp_List.get_Renderer(gRenderer);
-    c_List.get_Renderer(gRenderer);
+    //c_List.get_Renderer(gRenderer);
 
 }
 
@@ -132,7 +148,7 @@ bool New_Game::display_NewGame()
             pauseGame_Button.image_Render();
             p_Card.display_Card();
             s_Card.display_Card();
-            c_Card.display_Card();
+            pt_Card.display_Card();
 
             shovel_card.image_Render();
 
@@ -179,9 +195,9 @@ bool New_Game::display_NewGame()
                     sunFlower_Carry = true;
                 }
 
-                else if(c_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && c_Card.on_Cooldown == false && c_Card.sun_required <= total_suns)
+                else if(pt_Card.card_Region.is_Pressed(mouse_x,mouse_y,e) && pt_Card.on_Cooldown == false && pt_Card.sun_required <= total_suns)
                 {
-                    chomper_Carry = true;
+                    potato_Carry = true;
                 }
 
                 else if (shovel_Slot.is_Pressed(mouse_x,mouse_y,e))
@@ -239,24 +255,24 @@ bool New_Game::display_NewGame()
                     }
                 }
 
-                else if (chomper_Carry == true)
+                else if (potato_Carry == true)
                 {
                     if(e.type == SDL_MOUSEMOTION)
                     {
-                        chomper_root.area.x = mouse_x-50;
-                        chomper_root.area.y = mouse_y-50;
-                        chomper_rooting.image_Render();
+                        potato_root.area.x = mouse_x-50;
+                        potato_root.area.y = mouse_y-50;
+                        potato_rooting.image_Render();
                     }
                     else if (e.type == SDL_MOUSEBUTTONUP)
                     {
-                        chomper_Carry = false;
+                        potato_Carry = false;
                         if(front_Yard.onLawn(mouse_x,mouse_y) == true)
                         {
                             temp_plantRegion = front_Yard.return_tile(mouse_x,mouse_y);
-                            Chomper *c = new Chomper(gRenderer, &ChomperTexture, &EatingTexture, temp_plantRegion.area.x+10, temp_plantRegion.area.y);
-                            c_List.add_chomper(c);
-                            c_Card.on_Cooldown = true;
-                            total_suns = total_suns - c_Card.sun_required;
+                            Wallnut *pt =  new Wallnut(gRenderer, &WallnutTexture, &HitTexture, &MoreHitTexture, temp_plantRegion.area.x+10, temp_plantRegion.area.y+10);
+                            pt_List.add_potato(pt);
+                            pt_Card.on_Cooldown = true;
+                            total_suns = total_suns - pt_Card.sun_required;
                             plant_Place.play_Sound();
 
                         }
@@ -282,6 +298,7 @@ bool New_Game::display_NewGame()
                                 temp_plantShove = front_Yard.uproot(mouse_x,mouse_y);
                                 pp_List.del_plant(temp_plantShove->area.x, temp_plantShove->area.y);
                                 s_List.del_plant(temp_plantShove->area.x, temp_plantShove->area.y);
+                                pt_List.del_plant(temp_plantShove->area.x, temp_plantShove->area.y);
                                 cout <<"bro" << endl;
                             }
 
@@ -293,7 +310,7 @@ bool New_Game::display_NewGame()
             full_Screen.set_Viewport();
             s_List.display();
             pp_List.display();
-            c_List.display();
+            pt_List.display();
 
             //Update screen
             SDL_RenderPresent( gRenderer );

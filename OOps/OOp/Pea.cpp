@@ -9,7 +9,6 @@
 #include <time.h>
 #include "Sunflower.h"
 #include "PeaShooter.h"
-#include "Sun.h"
 
 using namespace std;
 
@@ -26,6 +25,7 @@ Pea::Pea(SDL_Renderer* gRenderer, float x, float y)
     this -> speed = 8;
     this -> damage = 20;
     this -> exists = true;
+    this -> name = "pea";
 
     PeaClip[ 0 ].x = 0;
     PeaClip[ 0 ].y = 0;

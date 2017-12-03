@@ -98,7 +98,7 @@ void Pause_Game::display_PauseMenu()
                 {
                     DoN_ButtonPress.image_Render();
                     button_Press.play_Sound();
-                    //game_Start->display_NewGame();
+
                 }
 
                 else if (DoN_Button.location->isOn(mouse_x,mouse_y) == true)
@@ -126,9 +126,7 @@ void Pause_Game::display_PauseMenu()
                  //Update screen
                 SDL_RenderPresent( gRenderer );
 
-                //Clears the renderer
-               // SDL_RenderClear( gRenderer );
-            }
+                }
         }
     }
 

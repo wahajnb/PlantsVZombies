@@ -5,9 +5,9 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
-#include"LTexture.h"
+#include "LTexture.h"
 
-
+using namespace std;
 
 
 class Pea
@@ -39,6 +39,7 @@ class Pea
         float ycord;
         int speed;
         int damage;
+        string name;
         bool exists;
         bool loadMedia();
         SDL_Renderer* gRenderer;

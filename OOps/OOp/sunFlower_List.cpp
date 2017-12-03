@@ -35,8 +35,7 @@ void sunFlower_List::del_plant(float a, float b)
     {
         if ((*i)->xcord == (a + 10) && (*i)->ycord == b)
         {
-            //delete (*i);
-            //(*i) -> die();
+            delete (*i);
             (*i)->exists = false;
             sunflower_arr.erase(i);
             cout <<"Sunflower deleted" << endl;
